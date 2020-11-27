@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1606476893 source:d:\Различные программы\vscode_files\alex_test\main.cpp
+	<iostream>
+	<fstream>
+	<ctime>
+
