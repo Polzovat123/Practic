@@ -4,7 +4,8 @@
 
 using namespace std;
 
-
+string name_user;
+bool open = false;
 
 void draw_header(string text){
     int right, left;
@@ -38,14 +39,26 @@ void draw_header(string text, char tabs){
     for(int i=0;i<right;i++)printf("%c", tabs);
 }
 
+void check(string login, string password){
+    ifstream cheker("dataset.txt");
+    int len;
+    cheker>>len;
+    for(int i =0; i< len; i++){
+        cheker>>now_login>>now_password;
+        if(now_login == login && now_password == password){
+            open = true;
+        }
+    }
+}
+
 void sign(){
     string login, password;
-    draw_header("Вход");
+    draw_header("Р’С…РѕРґ");
     cout<<endl;
-    draw_header("Логин", ' ');
+    draw_header("Р›РѕРіРёРЅ", ' ');
     cout<<endl;
     cin>>login;
-    draw_header("Пароль", ' ');
+    draw_header("РџР°СЂРѕР»СЊ", ' ');
     cout<<endl;
     cout<<"";
     cin>>password;
@@ -72,25 +85,25 @@ int ss(int num){
 }
 
 void finish_console(int score_n, string name, int best_score, string best_name ){
-    draw_header("результат");
+    draw_header("СЂРµР·СѓР»СЊС‚Р°С‚");
     cout<<"                                                                         "<<endl;
-    cout<<" Ваш результат: "<<score_n;
+    cout<<" Р’Р°С€ СЂРµР·СѓР»СЊС‚Р°С‚: "<<score_n;
     cout<<endl;
     cout<<"                                                                         "<<endl;
-    cout<<" Лучший игрок: "<<best_name;
+    cout<<" Р›СѓС‡С€РёР№ РёРіСЂРѕРє: "<<best_name;
     cout<<endl;
     cout<<"                                                                         "<<endl;
-    cout<<" Лучший результат: "<<best_score;
+    cout<<" Р›СѓС‡С€РёР№ СЂРµР·СѓР»СЊС‚Р°С‚: "<<best_score;
     cout<<endl;
     cout<<"                                                                         "<<endl;
-    draw_header("Конец");
+    draw_header("РљРѕРЅРµС†");
 }
 
 void finish_monitor(int user_score){
     string my_name;
     string best_name;
     int best_score;
-    cout<<"Напишите ваш ник : ";
+    cout<<"РќР°РїРёС€РёС‚Рµ РІР°С€ РЅРёРє : ";
     cin>>my_name;
     fstream in("save.txt");
     in>>best_score>>best_name;
@@ -105,8 +118,8 @@ void finish_monitor(int user_score){
 }
 
 void math_test(){
-    cout<<"Сейчас будет тест по математике по теме умножения и деления."<<endl;
-    cout<<"Сколько вопросов : ";
+    cout<<"РЎРµР№С‡Р°СЃ Р±СѓРґРµС‚ С‚РµСЃС‚ РїРѕ РјР°С‚РµРјР°С‚РёРєРµ РїРѕ С‚РµРјРµ СѓРјРЅРѕР¶РµРЅРёСЏ Рё РґРµР»РµРЅРёСЏ."<<endl;
+    cout<<"РЎРєРѕР»СЊРєРѕ РІРѕРїСЂРѕСЃРѕРІ : ";
     int siz = 50;
     cin>>siz;
     int score = 0;
@@ -116,17 +129,17 @@ void math_test(){
         score+=show_monitor(i+1, number);
         if((i+1)%24 == 0){
                 system("cls");
-                cout<<"Лист "<<(i+1)/24<<endl;
+                cout<<"Р›РёСЃС‚ "<<(i+1)/24<<endl;
         }
     }
     system("cls");
-    cout<<"Теперь деление)"<<endl;
+    cout<<"РўРµРїРµСЂСЊ РґРµР»РµРЅРёРµ)"<<endl;
     for(int i=0; i<siz - siz/2;i++){
         int number = rand()%11;
         score+=show_monitor_del(i+1, number*2);
         if((i+1)%24 == 0){
                 system("cls");
-                cout<<"Лист "<<(i+1)/24<<endl;
+                cout<<"Р›РёСЃС‚ "<<(i+1)/24<<endl;
         }
     }
 
@@ -134,14 +147,14 @@ void math_test(){
 }
 
 int show_menu(){
-    draw_header("Меню");
+    draw_header("РњРµРЅСЋ");
     int answer;
-    cout<<"                                                                         "<<endl;
-    draw_header("1. Математический тест ");//
-    cout<<"                                                                         "<<endl;
-    draw_header("2. Вход ");//
-    cout<<"                                                                         "<<endl;
-    draw_header("3. Авторизация");
+    cout<<endl;
+    draw_header("1. РњР°С‚РµРјР°С‚РёС‡РµСЃРєРёР№ С‚РµСЃС‚ ");//
+    cout<<endl;
+    draw_header("2. Р’С…РѕРґ ");//
+    cout<<endl;
+    draw_header("3. РђРІС‚РѕСЂРёР·Р°С†РёСЏ");
     cout<<endl;
     cin>>answer;
     return answer;
